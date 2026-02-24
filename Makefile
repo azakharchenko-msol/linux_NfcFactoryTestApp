@@ -1,4 +1,4 @@
-CC=gcc
+CC ?= gcc
 
 CFILES=NfcFactoryTestApp.c
 
@@ -14,23 +14,23 @@ CFLAGS=-Wall $(INCLUDES)
 
 drv:
 ifeq ("$(DEBUG)","ON")
-	$(CC) -o NfcFactoryTestApp $(CFLAGS) -DDEBUG $(CFILES) $(CFILES_DRV) $(LIBS)
+	$(CC) -o NfcFactoryTestApp $(CFLAGS) -DDEBUG $(CFILES) $(CFILES_DRV) $(LIBS) $(LDFLAGS)
 else
-	$(CC) -o NfcFactoryTestApp $(CFLAGS) $(CFILES) $(CFILES_DRV) $(LIBS)
+	$(CC) -o NfcFactoryTestApp $(CFLAGS) $(CFILES) $(CFILES_DRV) $(LIBS) $(LDFLAGS)
 endif
 
 alt-i2c:
 ifeq ("$(DEBUG)","ON")
-	$(CC) -o NfcFactoryTestApp $(CFLAGS) -DDEBUG $(CFILES) $(CFILES_I2C) $(LIBS)
+	$(CC) -o NfcFactoryTestApp $(CFLAGS) -DDEBUG $(CFILES) $(CFILES_I2C) $(LIBS) $(LDFLAGS)
 else
-	$(CC) -o NfcFactoryTestApp $(CFLAGS) $(CFILES) $(CFILES_I2C) $(LIBS)
+	$(CC) -o NfcFactoryTestApp $(CFLAGS) $(CFILES) $(CFILES_I2C) $(LIBS) $(LDFLAGS)
 endif
 
 alt-spi:
 ifeq ("$(DEBUG)","ON")
-	$(CC) -o NfcFactoryTestApp $(CFLAGS) -DDEBUG $(CFILES) $(CFILES_SPI) $(LIBS)
+	$(CC) -o NfcFactoryTestApp $(CFLAGS) -DDEBUG $(CFILES) $(CFILES_SPI) $(LIBS) $(LDFLAGS)
 else
-	$(CC) -o NfcFactoryTestApp $(CFLAGS) $(CFILES) $(CFILES_SPI) $(LIBS)
+	$(CC) -o NfcFactoryTestApp $(CFLAGS) $(CFILES) $(CFILES_SPI) $(LIBS) $(LDFLAGS)
 endif
 
 clean:
