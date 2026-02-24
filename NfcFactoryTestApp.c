@@ -365,18 +365,21 @@ static int reset_controller(int handle)
     char NCICoreInit2_0[] = {0x20, 0x01, 0x02, 0x00, 0x00};
     char Answer[256];
     int NbBytes = 0;
-
+    printf(" tml_reset(handle)\n");
     tml_reset(handle);
+    printf(" tml_transceive(handle, NCICoreReset, sizeof(NCICoreReset), Answer, sizeof(Answer))\n");
     tml_transceive(handle, NCICoreReset, sizeof(NCICoreReset), Answer, sizeof(Answer));
 
     /* Catch potential notification */
     usleep(100*1000);
+    printf(" NbBytes = tml_receive(handle,  Answer, sizeof(Answer))\n");
     NbBytes = tml_receive(handle,  Answer, sizeof(Answer));
-
+    printf("tml_transceive(handle, NCICoreReset, sizeof(NCICoreReset), Answer, sizeof(Answer))\n");
     tml_transceive(handle, NCICoreReset, sizeof(NCICoreReset), Answer, sizeof(Answer));
 
     /* Catch potential notification */
     usleep(100*1000);
+    printf(" NbBytes = tml_receive(handle,  Answer, sizeof(Answer));\n");
     NbBytes = tml_receive(handle,  Answer, sizeof(Answer));
 
     if((NbBytes == 12) && (Answer[0] == 0x60) && (Answer[1] == 0x00) && (Answer[3] == 0x02))
@@ -426,6 +429,7 @@ int main()
         return -1;
     }
 
+     printf("Try reset controller\n");
     if(reset_controller(nHandle) != 0) {
         printf("Error communicating with the NFC Controller\n");
         return -1;
